@@ -2,6 +2,7 @@ const SETTINGS = {
     RECORD_INTERVAL: 60,
     RECORD_MAX_COUNT: 1000,
     LOCAL_STORAGE_ID: 'TabRecorder',
+    LOCAL_STORAGE_LIMIT: 5200000,
     LOCALE_CODE: 'vi',
     DATE_OPTIONS: {
         timeZone: 'Asia/Ho_Chi_Minh',
@@ -35,7 +36,8 @@ function tabSave(data) {
         time: Date.now(),
         tabs: data,
     })
-    while (records.length > SETTINGS.RECORD_MAX_COUNT) {
+    while (records.length > SETTINGS.RECORD_MAX_COUNT
+        || JSON.stringify(records).length > SETTINGS.LOCAL_STORAGE_LIMIT) {
         records.pop()
     }
     localStorage.setItem(SETTINGS.LOCAL_STORAGE_ID, JSON.stringify(records))
