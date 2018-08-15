@@ -1,8 +1,8 @@
 const SETTINGS = {
-    RECORD_INTERVAL: 60,
+    RECORD_INTERVAL: 120,
     RECORD_MAX_COUNT: 1000,
-    LOCAL_STORAGE_ID: 'TabRecorder',
-    LOCAL_STORAGE_LIMIT: 5200000,
+    LOCAL_STORAGE_ID: 'tr',
+    LOCAL_STORAGE_LIMIT: 5241887,
     LOCALE_CODE: 'vi',
     DATE_OPTIONS: {
         timeZone: 'Asia/Ho_Chi_Minh',
@@ -48,14 +48,18 @@ function tabRecord() {
         const data = tabs
             .map(v => {
                 return {
+                    // tab id
                     id: v.id,
-                    windowId: v.windowId,
+                    // window id
+                    wid: v.windowId,
+                    // title
                     title: v.title,
+                    // url
                     url: v.url,
                 }
             })
-            .sort((a, b) => a.windowId != b.windowId
-                ? a.windowId - b.windowId
+            .sort((a, b) => a.wid != b.wid
+                ? a.wid - b.wid
                 : a.id - b.id)
         tabSave(data)
     })
