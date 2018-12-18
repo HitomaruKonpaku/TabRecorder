@@ -45,22 +45,24 @@ function tabSave(data) {
 
 function tabRecord() {
     chrome.tabs.query({}, tabs => {
+        const widSet = new Set()
         const data = tabs
+            .sort((a, b) => a.windowId != b.windowId
+                ? a.windowId - b.windowId
+                : a.index - b.index)
             .map(v => {
+                widSet.add(v.windowId)
                 return {
-                    // tab id
-                    id: v.id,
                     // window id
-                    wid: v.windowId,
+                    w: widSet.size - 1,
+                    // window index
+                    i: v.index,
                     // title
-                    title: v.title,
+                    t: v.title,
                     // url
-                    url: v.url,
+                    u: v.url,
                 }
             })
-            .sort((a, b) => a.wid != b.wid
-                ? a.wid - b.wid
-                : a.id - b.id)
         tabSave(data)
     })
 }
