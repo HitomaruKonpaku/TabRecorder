@@ -1,32 +1,32 @@
 {
-    "manifest_version": 2,
-    "name": "TabRecorder",
-    "version": "1.0",
-    "description": "Track & record all to local storage",
-    "homepage_url": "https://github.com/HitomaruKonpaku/TabRecorder",
-    "icons": {},
-    "background": {
-        "scripts": [
-            "js/bg/background.js",
-            "js/bg/event.js"
-        ],
-        "persistent": false
-    },
-    "content_scripts": [
-        {
-            "matches": [
-                "<all_urls>"
-            ],
-            "js": [
-                "js/tabrecorder.js"
-            ]
-        }
-    ],
-    "permissions": [
-        "activeTab",
-        "tabs",
-        "background",
-        "storage",
-        "unlimitedStorage"
+  "manifest_version": 2,
+  "name": "TabRecorder",
+  "version": "2.0",
+  "description": "Track & record all to local storage",
+  "icons": {},
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "src/js/bg/config.js",
+      "src/js/bg/background.js"
     ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/js/inject.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "background",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "homepage_url": "https://github.com/HitomaruKonpaku/TabRecorder"
 }
