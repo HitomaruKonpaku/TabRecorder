@@ -69,3 +69,21 @@ function showTabRecorderData() {
   })
   console.log(records)
 }
+
+function openTabsWithTime(time) {
+  if (isNaN(time)) {
+    return
+  }
+  const key = window.TabRecorder.config.localStorageKey
+  const records = JSON.parse(localStorage.getItem(key))
+  const record = records.find(v => v.time === time)
+  if (!record) {
+    return
+  }
+  const tabs = record.tabs
+  const urls = tabs.map(v => v[3])
+  console.log(urls)
+  urls.forEach(url => {
+    window.open(url)
+  })
+}
